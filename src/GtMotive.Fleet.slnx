@@ -1,0 +1,24 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../.editorconfig" />
+    <File Path="../Directory.Build.targets" />
+    <File Path="../global.json" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="GtMotive.Fleet.Api/GtMotive.Fleet.Api.csproj" />
+    <Project Path="GtMotive.Fleet.ApplicationCore/GtMotive.Fleet.ApplicationCore.csproj" />
+    <Project Path="GtMotive.Fleet.Domain/GtMotive.Fleet.Domain.csproj" />
+    <Project Path="GtMotive.Fleet.Host/GtMotive.Fleet.Host.csproj" />
+    <Project Path="GtMotive.Fleet.Infrastructure/GtMotive.Fleet.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/test/" />
+  <Folder Name="/test/functional/">
+    <Project Path="../test/functional/GtMotive.Fleet.FunctionalTests/GtMotive.Fleet.FunctionalTests.csproj" />
+  </Folder>
+  <Folder Name="/test/infrastructure/">
+    <Project Path="../test/infrastructure/GtMotive.Fleet.InfrastructureTests/GtMotive.Fleet.InfrastructureTests.csproj" />
+  </Folder>
+  <Folder Name="/test/unit/">
+    <Project Path="../test/unit/GtMotive.Fleet.UnitTests/GtMotive.Fleet.UnitTests.csproj" />
+  </Folder>
+</Solution>

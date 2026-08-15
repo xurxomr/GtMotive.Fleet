@@ -1,0 +1,30 @@
+# Build outputs
+**/bin/
+**/obj/
+**/out/
+**/publish/
+
+# IDE / editor
+**/.vs/
+**/.vscode/
+**/.idea/
+**/*.user
+**/*.suo
+
+# Git
+**/.git/
+**/.gitignore
+**/.gitattributes
+
+# Docker
+**/.dockerignore
+**/docker-compose*.yml
+**/Dockerfile*
+
+# Tests & docs (not needed in the app image)
+test/
+**/*.md
+
+# Local secrets / env
+**/*.env
+**/secrets.json
