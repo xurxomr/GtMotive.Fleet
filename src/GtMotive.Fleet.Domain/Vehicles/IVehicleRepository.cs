@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GtMotive.Fleet.Domain.Vehicles
@@ -13,5 +14,11 @@ namespace GtMotive.Fleet.Domain.Vehicles
         /// <param name="vehicle">Vehicle to add.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
         Task Add(Vehicle vehicle);
+
+        /// <summary>
+        /// Gets the vehicles that are currently available to be rented.
+        /// </summary>
+        /// <returns>The available vehicles.</returns>
+        Task<IReadOnlyList<Vehicle>> GetAvailable();
     }
 }
