@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace GtMotive.Fleet.InfrastructureTests.Infrastructure
 {
-    internal sealed class GenericInfrastructureTestServerFixture : IDisposable
+    public sealed class GenericInfrastructureTestServerFixture : IDisposable
     {
         private readonly IHost _host;
 

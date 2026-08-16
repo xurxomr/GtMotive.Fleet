@@ -1,3 +1,6 @@
+using GtMotive.Fleet.Api.UseCases.RegisterVehicle;
+using GtMotive.Fleet.ApplicationCore.UseCases;
+using GtMotive.Fleet.ApplicationCore.UseCases.RegisterVehicle;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GtMotive.Fleet.Api.DependencyInjection
@@ -6,6 +9,9 @@ namespace GtMotive.Fleet.Api.DependencyInjection
     {
         public static IServiceCollection AddPresenters(this IServiceCollection services)
         {
+            services.AddScoped<RegisterVehiclePresenter>();
+            services.AddScoped<IOutputPortStandard<RegisterVehicleOutput>>(provider => provider.GetRequiredService<RegisterVehiclePresenter>());
+
             return services;
         }
     }
