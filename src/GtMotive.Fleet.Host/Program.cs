@@ -2,6 +2,7 @@ using System.Globalization;
 using GtMotive.Fleet.Api;
 using GtMotive.Fleet.Host.DependencyInjection;
 using GtMotive.Fleet.Infrastructure;
+using GtMotive.Fleet.Infrastructure.Persistence.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
@@ -35,7 +36,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers(ApiConfiguration.ConfigureControllers)
     .WithApiControllers();
 
-builder.Services.AddBaseInfrastructure();
+builder.Services.AddBaseInfrastructure(builder.Configuration);
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -92,5 +93,7 @@ app.UseSwaggerInApplication(pathBase);
 app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
+
+await app.Services.MigrateFleetDatabaseAsync();
 
 await app.RunAsync();

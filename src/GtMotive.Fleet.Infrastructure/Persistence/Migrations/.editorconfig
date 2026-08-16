@@ -1,0 +1,5 @@
+[*.cs]
+
+# EF Core migrations are generated code and must not be edited to satisfy analyzers.
+generated_code = true
+dotnet_analyzer_diagnostic.severity = none

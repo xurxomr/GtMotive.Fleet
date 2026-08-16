@@ -1,45 +1,57 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using GtMotive.Fleet.Api;
 using GtMotive.Fleet.Infrastructure;
+using GtMotive.Fleet.Infrastructure.Persistence;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Testcontainers.PostgreSql;
 using Xunit;
 
 [assembly: CLSCompliant(false)]
 
 namespace GtMotive.Fleet.FunctionalTests.Infrastructure
 {
-    internal sealed class CompositionRootTestFixture : IDisposable, IAsyncLifetime
+    public sealed class CompositionRootTestFixture : IAsyncLifetime
     {
-        private readonly ServiceProvider _serviceProvider;
+        private readonly PostgreSqlContainer _database = new PostgreSqlBuilder()
+            .WithImage("postgres:17.2-alpine")
+            .Build();
 
-        public CompositionRootTestFixture()
+        private ServiceProvider _serviceProvider;
+
+        public IConfiguration Configuration { get; private set; }
+
+        public async Task InitializeAsync()
         {
+            await _database.StartAsync();
+
             var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddEnvironmentVariables()
+                .AddInMemoryCollection(new Dictionary<string, string>
+                {
+                    ["ConnectionStrings:FleetDb"] = _database.GetConnectionString(),
+                })
                 .Build();
 
             var services = new ServiceCollection();
             Configuration = configuration;
-            ConfigureServices(services);
+            ConfigureServices(services, configuration);
             services.AddSingleton<IConfiguration>(configuration);
             _serviceProvider = services.BuildServiceProvider();
-        }
 
-        public IConfiguration Configuration { get; }
-
-        public async Task InitializeAsync()
-        {
-            await Task.CompletedTask;
+            using var scope = _serviceProvider.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<FleetDbContext>();
+            await context.Database.MigrateAsync();
         }
 
         public async Task DisposeAsync()
         {
-            await Task.CompletedTask;
+            await _serviceProvider.DisposeAsync();
+            await _database.DisposeAsync();
         }
 
         public async Task UsingHandlerForRequest<TRequest>(Func<IRequestHandler<TRequest, Unit>, Task> handlerAction)
@@ -84,16 +96,11 @@ namespace GtMotive.Fleet.FunctionalTests.Infrastructure
             await handlerAction.Invoke(handler);
         }
 
-        public void Dispose()
-        {
-            _serviceProvider.Dispose();
-        }
-
-        private static void ConfigureServices(IServiceCollection services)
+        private static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddApiDependencies();
             services.AddLogging();
-            services.AddBaseInfrastructure();
+            services.AddBaseInfrastructure(configuration);
         }
     }
 }

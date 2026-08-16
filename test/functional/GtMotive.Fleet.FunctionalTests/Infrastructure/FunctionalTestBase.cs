@@ -4,7 +4,7 @@ using Xunit;
 namespace GtMotive.Fleet.FunctionalTests.Infrastructure
 {
     [Collection(TestCollections.Functional)]
-    internal abstract class FunctionalTestBase(CompositionRootTestFixture fixture) : IAsyncLifetime
+    public abstract class FunctionalTestBase(CompositionRootTestFixture fixture) : IAsyncLifetime
     {
         public const int QueueWaitingTimeInMilliseconds = 1000;
 
