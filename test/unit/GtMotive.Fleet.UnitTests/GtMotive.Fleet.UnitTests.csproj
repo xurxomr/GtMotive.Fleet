@@ -7,24 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Domain\**" />
-    <EmbeddedResource Remove="Domain\**" />
-    <None Remove="Domain\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Moq" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\GtMotive.Fleet.Api\GtMotive.Fleet.Api.csproj" />
     <ProjectReference Include="..\..\..\src\GtMotive.Fleet.ApplicationCore\GtMotive.Fleet.ApplicationCore.csproj" />
+    <ProjectReference Include="..\..\..\src\GtMotive.Fleet.Domain\GtMotive.Fleet.Domain.csproj" />
     <ProjectReference Include="..\..\..\src\GtMotive.Fleet.Infrastructure\GtMotive.Fleet.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Api\" />
     <Folder Include="ApplicationCore\" />
+    <Folder Include="Domain\" />
     <Folder Include="Infrastructure\" />
   </ItemGroup>
 
