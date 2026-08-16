@@ -1,5 +1,8 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using GtMotive.Fleet.ApplicationCore.UseCases;
+using GtMotive.Fleet.ApplicationCore.UseCases.RegisterVehicle;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: CLSCompliant(false)]
@@ -19,6 +22,10 @@ namespace GtMotive.Fleet.ApplicationCore
         /// <returns>The modified instance.</returns>
         public static IServiceCollection AddUseCases(this IServiceCollection services)
         {
+            services.AddScoped<RegisterVehicleUseCase>();
+            services.AddScoped<IUseCase<RegisterVehicleInput>>(provider => provider.GetRequiredService<RegisterVehicleUseCase>());
+            services.AddScoped<IRequestHandler<RegisterVehicleInput, Unit>>(provider => provider.GetRequiredService<RegisterVehicleUseCase>());
+
             return services;
         }
     }
