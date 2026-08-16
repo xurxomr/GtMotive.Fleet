@@ -23,6 +23,8 @@ namespace GtMotive.Fleet.Infrastructure.Persistence.Configurations
 
             builder.Property(rental => rental.StartedOn).IsRequired();
 
+            builder.Property(rental => rental.EndedOn);
+
             builder.Property(rental => rental.Status)
                 .HasConversion<string>()
                 .HasMaxLength(16)

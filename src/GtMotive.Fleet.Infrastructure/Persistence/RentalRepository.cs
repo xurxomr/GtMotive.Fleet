@@ -21,5 +21,11 @@ namespace GtMotive.Fleet.Infrastructure.Persistence
             return await context.Rentals.AnyAsync(rental =>
                 rental.RenterId == renterId && rental.Status == RentalStatus.Active);
         }
+
+        public async Task<Rental> GetActiveByVehicle(Guid vehicleId)
+        {
+            return await context.Rentals.FirstOrDefaultAsync(rental =>
+                rental.VehicleId == vehicleId && rental.Status == RentalStatus.Active);
+        }
     }
 }

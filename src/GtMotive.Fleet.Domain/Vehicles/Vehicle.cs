@@ -70,5 +70,18 @@ namespace GtMotive.Fleet.Domain.Vehicles
 
             Status = VehicleStatus.Rented;
         }
+
+        /// <summary>
+        /// Marks the vehicle as available again, enforcing that only rented vehicles can be returned.
+        /// </summary>
+        public void Return()
+        {
+            if (Status != VehicleStatus.Rented)
+            {
+                throw new DomainException("Only a rented vehicle can be returned.");
+            }
+
+            Status = VehicleStatus.Available;
+        }
     }
 }

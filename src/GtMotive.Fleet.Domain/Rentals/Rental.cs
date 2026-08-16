@@ -42,6 +42,11 @@ namespace GtMotive.Fleet.Domain.Rentals
         public RentalStatus Status { get; private set; }
 
         /// <summary>
+        /// Gets the date on which the rental was closed, or <c>null</c> while it is active.
+        /// </summary>
+        public DateOnly? EndedOn { get; private set; }
+
+        /// <summary>
         /// Creates a new active rental.
         /// </summary>
         /// <param name="vehicleId">Identifier of the rented vehicle.</param>
@@ -53,6 +58,21 @@ namespace GtMotive.Fleet.Domain.Rentals
             ArgumentNullException.ThrowIfNull(renterId);
 
             return new Rental(Guid.NewGuid(), vehicleId, renterId, today, RentalStatus.Active);
+        }
+
+        /// <summary>
+        /// Closes the rental, enforcing that only an active rental can be closed.
+        /// </summary>
+        /// <param name="today">Date on which the rental is closed.</param>
+        public void Close(DateOnly today)
+        {
+            if (Status != RentalStatus.Active)
+            {
+                throw new DomainException("Only an active rental can be closed.");
+            }
+
+            Status = RentalStatus.Closed;
+            EndedOn = today;
         }
     }
 }

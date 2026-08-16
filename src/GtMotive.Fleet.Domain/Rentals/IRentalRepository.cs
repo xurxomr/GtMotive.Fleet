@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 
 namespace GtMotive.Fleet.Domain.Rentals
@@ -20,5 +21,12 @@ namespace GtMotive.Fleet.Domain.Rentals
         /// <param name="renterId">Identifier of the renter.</param>
         /// <returns><c>true</c> if the renter has an active rental; otherwise, <c>false</c>.</returns>
         Task<bool> HasActiveRental(RenterId renterId);
+
+        /// <summary>
+        /// Gets the active rental for a vehicle, or <c>null</c> when it is not rented.
+        /// </summary>
+        /// <param name="vehicleId">Identifier of the vehicle.</param>
+        /// <returns>The active rental, or <c>null</c> when the vehicle is not rented.</returns>
+        Task<Rental> GetActiveByVehicle(Guid vehicleId);
     }
 }

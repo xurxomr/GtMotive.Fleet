@@ -81,5 +81,32 @@ namespace GtMotive.Fleet.UnitTests.Domain.Vehicles
             // Assert
             act.Should().Throw<DomainException>();
         }
+
+        [Fact]
+        public void Return_RentedVehicle_MarksItAvailable()
+        {
+            // Arrange
+            var vehicle = Vehicle.Create(LicensePlate.Create("1234ABC"), Today.AddYears(-1), Today);
+            vehicle.Rent();
+
+            // Act
+            vehicle.Return();
+
+            // Assert
+            vehicle.Status.Should().Be(VehicleStatus.Available);
+        }
+
+        [Fact]
+        public void Return_AvailableVehicle_ThrowsDomainException()
+        {
+            // Arrange
+            var vehicle = Vehicle.Create(LicensePlate.Create("1234ABC"), Today.AddYears(-1), Today);
+
+            // Act
+            var act = vehicle.Return;
+
+            // Assert
+            act.Should().Throw<DomainException>();
+        }
     }
 }
