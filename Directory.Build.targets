@@ -31,6 +31,9 @@
         <!-- Swagger -->
         <PackageReference Update="Swashbuckle.AspNetCore" Version="9.0.6" />
 
+        <!-- Visual Studio container tooling (Docker startup profile) -->
+        <PackageReference Update="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
+
         <!-- MediatR -->
         <PackageReference Update="MediatR" Version="10.0.1" />
         <PackageReference Update="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />

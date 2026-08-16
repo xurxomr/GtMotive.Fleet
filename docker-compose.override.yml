@@ -1,0 +1,4 @@
+services:
+  fleet-api:
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
