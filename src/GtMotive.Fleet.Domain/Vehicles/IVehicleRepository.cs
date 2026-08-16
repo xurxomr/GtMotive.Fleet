@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,5 +21,12 @@ namespace GtMotive.Fleet.Domain.Vehicles
         /// </summary>
         /// <returns>The available vehicles.</returns>
         Task<IReadOnlyList<Vehicle>> GetAvailable();
+
+        /// <summary>
+        /// Gets a vehicle by its identifier, or <c>null</c> when it does not exist.
+        /// </summary>
+        /// <param name="id">Vehicle identifier.</param>
+        /// <returns>The vehicle, or <c>null</c> when not found.</returns>
+        Task<Vehicle> GetById(Guid id);
     }
 }

@@ -54,6 +54,13 @@ namespace GtMotive.Fleet.FunctionalTests.Infrastructure
             await _database.DisposeAsync();
         }
 
+        public async Task ResetDatabaseAsync()
+        {
+            using var scope = _serviceProvider.CreateScope();
+            var context = scope.ServiceProvider.GetRequiredService<FleetDbContext>();
+            await context.Database.ExecuteSqlRawAsync("TRUNCATE TABLE \"Rentals\", \"Vehicles\";");
+        }
+
         public async Task UsingHandlerForRequest<TRequest>(Func<IRequestHandler<TRequest, Unit>, Task> handlerAction)
             where TRequest : IRequest
         {

@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using GtMotive.Fleet.ApplicationCore.UseCases;
 using GtMotive.Fleet.ApplicationCore.UseCases.ListAvailableVehicles;
 using GtMotive.Fleet.ApplicationCore.UseCases.RegisterVehicle;
+using GtMotive.Fleet.ApplicationCore.UseCases.RentVehicle;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -30,6 +31,10 @@ namespace GtMotive.Fleet.ApplicationCore
             services.AddScoped<ListAvailableVehiclesUseCase>();
             services.AddScoped<IUseCase<ListAvailableVehiclesInput>>(provider => provider.GetRequiredService<ListAvailableVehiclesUseCase>());
             services.AddScoped<IRequestHandler<ListAvailableVehiclesInput, Unit>>(provider => provider.GetRequiredService<ListAvailableVehiclesUseCase>());
+
+            services.AddScoped<RentVehicleUseCase>();
+            services.AddScoped<IUseCase<RentVehicleInput>>(provider => provider.GetRequiredService<RentVehicleUseCase>());
+            services.AddScoped<IRequestHandler<RentVehicleInput, Unit>>(provider => provider.GetRequiredService<RentVehicleUseCase>());
 
             return services;
         }

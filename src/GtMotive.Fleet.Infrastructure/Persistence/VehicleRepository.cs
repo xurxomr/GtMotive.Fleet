@@ -22,5 +22,10 @@ namespace GtMotive.Fleet.Infrastructure.Persistence
                 .Where(vehicle => vehicle.Status == VehicleStatus.Available)
                 .ToListAsync();
         }
+
+        public async Task<Vehicle> GetById(Guid id)
+        {
+            return await context.Vehicles.FirstOrDefaultAsync(vehicle => vehicle.Id == id);
+        }
     }
 }

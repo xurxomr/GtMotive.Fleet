@@ -57,5 +57,18 @@ namespace GtMotive.Fleet.Domain.Vehicles
                 ? throw new DomainException($"A vehicle manufacturing date cannot be older than {MaxManufacturingAgeInYears} years.")
                 : new Vehicle(Guid.NewGuid(), licensePlate, manufacturingDate, VehicleStatus.Available);
         }
+
+        /// <summary>
+        /// Marks the vehicle as rented, enforcing that only available vehicles can be rented.
+        /// </summary>
+        public void Rent()
+        {
+            if (Status != VehicleStatus.Available)
+            {
+                throw new DomainException("Only an available vehicle can be rented.");
+            }
+
+            Status = VehicleStatus.Rented;
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace GtMotive.Fleet.FunctionalTests.Infrastructure
 
         public async Task InitializeAsync()
         {
-            await Task.CompletedTask;
+            await Fixture.ResetDatabaseAsync();
         }
 
         public async Task DisposeAsync()

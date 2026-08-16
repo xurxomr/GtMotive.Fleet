@@ -1,8 +1,10 @@
 using GtMotive.Fleet.Api.UseCases.ListAvailableVehicles;
 using GtMotive.Fleet.Api.UseCases.RegisterVehicle;
+using GtMotive.Fleet.Api.UseCases.RentVehicle;
 using GtMotive.Fleet.ApplicationCore.UseCases;
 using GtMotive.Fleet.ApplicationCore.UseCases.ListAvailableVehicles;
 using GtMotive.Fleet.ApplicationCore.UseCases.RegisterVehicle;
+using GtMotive.Fleet.ApplicationCore.UseCases.RentVehicle;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GtMotive.Fleet.Api.DependencyInjection
@@ -16,6 +18,9 @@ namespace GtMotive.Fleet.Api.DependencyInjection
 
             services.AddScoped<ListAvailableVehiclesPresenter>();
             services.AddScoped<IOutputPortStandard<ListAvailableVehiclesOutput>>(provider => provider.GetRequiredService<ListAvailableVehiclesPresenter>());
+
+            services.AddScoped<RentVehiclePresenter>();
+            services.AddScoped<IOutputPortStandard<RentVehicleOutput>>(provider => provider.GetRequiredService<RentVehiclePresenter>());
 
             return services;
         }
