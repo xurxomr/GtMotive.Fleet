@@ -5,6 +5,8 @@
       <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
       <WarningsAsErrors />
+      <GenerateDocumentationFile>true</GenerateDocumentationFile>
+      <NoWarn>1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

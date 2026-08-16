@@ -1,0 +1,7 @@
+[*.cs]
+
+# Test method names follow the Method_State_Expected convention with underscores.
+dotnet_diagnostic.CA1707.severity = none
+
+# xUnit requires public test classes and fixtures, so exposing them is intentional.
+dotnet_diagnostic.CA1515.severity = none
