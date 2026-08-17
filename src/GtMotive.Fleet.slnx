@@ -21,5 +21,7 @@
   <Folder Name="/test/unit/">
     <Project Path="../test/unit/GtMotive.Fleet.UnitTests/GtMotive.Fleet.UnitTests.csproj" />
   </Folder>
-  <Project Path="../docker-compose.dcproj" />
+  <Project Path="../docker-compose.dcproj">
+    <Build />
+  </Project>
 </Solution>
